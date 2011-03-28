@@ -1,0 +1,78 @@
+<project name="RiskAnalyticsUlcExtensions" default="cruise">
+
+    <property environment="env"/>
+    <property name="GRAILS_HOME" value="${env.GRAILS_HOME}"/>
+    <import file="${GRAILS_HOME}/src/grails/grails-macros.xml"/>
+
+    <property file="application.properties"/>
+
+    <property name="build.prod.dir" value="${user.home}/.grails/${app.grails.version}/projects/${app.name}"/>
+    <property name="plugin.dir" value="${basedir}/../local-plugins/RiskAnalyticsApplication-master"/>
+    <property name="classes.prod.dir" value="${build.prod.dir}/classes"/>
+    <property name="resources.prod.dir" value="src/java"/>
+
+    <property name="dist.dir" value="dist"/>
+    <property name="target.dir" value="target"/>
+    <property name="webapp.lib.dir" value="web-app/lib"/>
+    <property name="doc.dir" value="docs"/>
+
+    <condition property="grails" value="${GRAILS_HOME}/bin/grails.bat">
+        <os family="windows"/>
+    </condition>
+    <property name="grails" value="${GRAILS_HOME}/bin/grails"/>
+
+    <tstamp>
+        <format property="build-timestamp" pattern="dd.MM.yyyy HH:mm"/>
+    </tstamp>
+
+    <target name="cruise" depends="clean,compile,test"
+            description="to be started by the CruiseControl build server"/>
+
+
+    <target name="clean" description="--> Cleans a Grails application">
+        <delete dir="${dist.dir}"/>
+
+        <mkdir dir="${dist.dir}"/>
+        <grails command="clean"/>
+        <delete verbose="true">
+            <fileset dir="." includes="*Db.script"/>
+            <fileset dir="." includes="**Db.properties"/>
+            <fileset dir="." includes="*.tsl"/>
+            <fileset dir="." includes="*.log"/>
+        </delete>
+    </target>
+
+    <target name="compile" description="--> Compiles a Grails application">
+        <exec executable="${grails}" failonerror="true" resolveexecutable="true">
+            <arg value="compile"/>
+            <arg value="--non-interactive"/>
+            <env key="GRAILS_HOME" value="${GRAILS_HOME}"/>
+            <env key="JAVA_OPTS"
+                 value="-Xmx512m -XX:MaxPermSize=128m"/>
+        </exec>
+    </target>
+
+
+    <target name="test" description="--> Run a Grails applications unit tests">
+        <exec executable="${grails}" failonerror="true" resolveexecutable="true">
+            <arg value="test-app"/>
+            <!--<arg value="-coverage"/>-->
+            <env key="GRAILS_HOME" value="${GRAILS_HOME}"/>
+            <env key="JAVA_OPTS"
+                 value="-Xmx512m -XX:MaxPermSize=128m -Duser.language='en'"/>
+        </exec>
+        <copy todir="${dist.dir}">
+            <fileset dir="target" includes="test-reports/"/>
+        </copy>
+    </target>
+
+    <target name="release-plugin" depends="clean, compile"
+            description="Releases the plugin in our P1 plugin repository.">
+        <exec executable="${grails}" failonerror="true" resolveexecutable="true">
+            <arg value="deploy-plugin"/>
+            <arg value="--repository=pillarone"/>
+            <env key="GRAILS_HOME" value="${GRAILS_HOME}"/>
+        </exec>
+    </target>
+
+</project>
