@@ -1,3 +1,5 @@
+import org.apache.ivy.plugins.resolver.FileSystemResolver
+
 grails.project.dependency.resolution = {
     inherits "global" // inherit Grails' default dependencies
     log "warn"
@@ -7,13 +9,32 @@ grails.project.dependency.resolution = {
         grailsCentral()
     }
 
+    def ulcClientJarResolver = new FileSystemResolver()
+    String absolutePluginDir = grailsSettings.projectPluginsDir.absolutePath
+
+    ulcClientJarResolver.addArtifactPattern "${absolutePluginDir}/ulc-[revision]/web-app/lib/[artifact].[ext]"
+    ulcClientJarResolver.name = "ulc"
+
+    resolver ulcClientJarResolver
+
+
     mavenRepo "https://build.intuitive-collaboration.com/maven/plugins/"
 
     String ulcVersion = "ria-suite-u2"
 
     plugins {
         runtime ":maven-publisher:0.7.5"
+        runtime ":jetty:1.2-SNAPSHOT"
         compile "com.canoo:ulc:${ulcVersion}"
+    }
+
+     dependencies {
+        compile group: 'canoo', name: 'ulc-applet-client', version: ulcVersion
+        compile group: 'canoo', name: 'ulc-base-client', version: ulcVersion
+        compile group: 'canoo', name: 'ulc-base-trusted', version: ulcVersion
+        compile group: 'canoo', name: 'ulc-jnlp-client', version: ulcVersion
+        compile group: 'canoo', name: 'ulc-servlet-client', version: ulcVersion
+        compile group: 'canoo', name: 'ulc-standalone-client', version: ulcVersion
     }
 }
 

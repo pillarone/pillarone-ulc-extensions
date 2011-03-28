@@ -1,4 +1,4 @@
-package org.pillarone.riskanalytics.application.ui.util.server;
+package org.pillarone.ulc.server;
 
 /*
  * Copyright © 2000-2007 Canoo Engineering AG, Switzerland.
@@ -34,8 +34,8 @@ public class ULCMinimalSizeFrame extends ULCFrame {
 
 
     protected String typeString() {
-        return "org.pillarone.riskanalytics.application.client.UIMinimalSizeFrame";
+        return "org.pillarone.ulc.client.UIMinimalSizeFrame";
     }
 }
 
-    
+

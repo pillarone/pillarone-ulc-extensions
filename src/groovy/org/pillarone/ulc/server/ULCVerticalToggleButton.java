@@ -1,4 +1,4 @@
-package org.pillarone.riskanalytics.application.ui.util.server;
+package org.pillarone.ulc.server;
 
 import com.ulcjava.base.application.IAction;
 import com.ulcjava.base.application.ULCToggleButton;
@@ -23,6 +23,6 @@ public class ULCVerticalToggleButton extends ULCToggleButton {
     }
 
     protected String typeString() {
-        return "org.pillarone.riskanalytics.application.client.UIVerticalToggleButton";
+        return "org.pillarone.ulc.client.UIVerticalToggleButton";
     }
 }

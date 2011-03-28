@@ -1,4 +1,4 @@
-package org.pillarone.riskanalytics.application.client;
+package org.pillarone.ulc.client;
 
 /*
  * Copyright © 2000-2007 Canoo Engineering AG, Switzerland.

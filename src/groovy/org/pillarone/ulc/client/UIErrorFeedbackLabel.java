@@ -1,4 +1,4 @@
-package org.pillarone.riskanalytics.application.client;
+package org.pillarone.ulc.client;
 
 import com.ulcjava.base.client.UILabel;
 import com.ulcjava.base.client.datatype.DataTypeConversionException;

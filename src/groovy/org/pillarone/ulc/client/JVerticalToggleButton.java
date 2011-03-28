@@ -1,4 +1,4 @@
-package org.pillarone.riskanalytics.application.client;
+package org.pillarone.ulc.client;
 
 
 import javax.swing.*;

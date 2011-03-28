@@ -10,19 +10,16 @@ class RiskAnalyticsUlcExtensionsGrailsPlugin {
             "grails-app/views/error.gsp"
     ]
 
-    // TODO Fill in these fields
-    def author = "Your name"
+    def author = "Intuitive Collaboration AG"
     def authorEmail = ""
-    def title = "Plugin summary/headline"
-    def description = '''\\
-Brief description of the plugin.
-'''
+    def title = "ULC extensions for P1"
+    def description = ""
 
     // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/risk-analytics-ulc-extensions"
 
     def doWithWebDescriptor = { xml ->
-        // TODO Implement additions to web.xml (optional), this event occurs before 
+        // TODO Implement additions to web.xml (optional), this event occurs before
     }
 
     def doWithSpring = {

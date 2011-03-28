@@ -1,4 +1,4 @@
-package org.pillarone.riskanalytics.application.ui.util.server
+package org.pillarone.ulc.server
 
 import com.ulcjava.base.application.datatype.IDataType
 import com.ulcjava.base.application.datatype.ULCAbstractDataType
@@ -23,7 +23,7 @@ class ULCFlexibleDateDataType extends ULCAbstractDataType implements IDataType {
 
     @Override
     protected String typeString() {
-        return "org.pillarone.riskanalytics.application.client.UIFlexibleDateDataType"
+        return "org.pillarone.ulc.client.UIFlexibleDateDataType"
     }
 
     @Override
