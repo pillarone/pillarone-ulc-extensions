@@ -12,8 +12,8 @@ import java.awt.event.MouseMotionAdapter;
 
 public class CloseableTabRenderer implements Icon {
 
-    private final static Icon closeIcon = new ImageIcon(CloseableTabRenderer.class.getResource("/org/pillarone/riskanalytics/application/icons/close-active.png"));
-    private final static Icon rolloverIcon = new ImageIcon(CloseableTabRenderer.class.getResource("/org/pillarone/riskanalytics/application/icons/close-inactive.png"));
+    private final static Icon closeIcon = new ImageIcon(CloseableTabRenderer.class.getResource("/org/pillarone/ulc/icons/close-active.png"));
+    private final static Icon rolloverIcon = new ImageIcon(CloseableTabRenderer.class.getResource("/org/pillarone/ulc/icons/close-inactive.png"));
     private UICloseableTabbedPane.BasicCloseableTabbedPane tabbedPane;
     private Rectangle activeClosableArea = new Rectangle(0, 0, -1, -1);  //empty area needs a negative dimension
     private Rectangle tabArea = new Rectangle(0, 0, -1, -1);
