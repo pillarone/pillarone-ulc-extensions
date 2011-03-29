@@ -15,6 +15,8 @@ class PillarOneUlcExtensionsGrailsPlugin {
     def title = "ULC extensions for P1"
     def description = ""
 
+    def groupId = "org.pillarone"
+
     // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/risk-analytics-ulc-extensions"
 
