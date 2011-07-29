@@ -26,9 +26,11 @@ grails.project.dependency.resolution = {
         runtime ":maven-publisher:0.7.5"
         runtime ":jetty:1.2-SNAPSHOT"
         compile "com.canoo:ulc:${ulcVersion}"
+
+        test ":code-coverage:1.2.4"
     }
 
-     dependencies {
+    dependencies {
         compile group: 'canoo', name: 'ulc-applet-client', version: ulcVersion
         compile group: 'canoo', name: 'ulc-base-client', version: ulcVersion
         compile group: 'canoo', name: 'ulc-base-trusted', version: ulcVersion
@@ -52,4 +54,20 @@ grails.project.dependency.distribution = {
     remoteRepository(id: "pillarone", url: scpUrl) {
         authentication username: 'root', privateKey: "${userHome.absolutePath}/.ssh/id_rsa", passphrase: passPhrase
     }
+}
+
+coverage {
+    enabledByDefault = true
+    xml = true
+    exclusions = [
+            'models/**',
+            '**/*Test*',
+            '**/com/energizedwork/grails/plugins/jodatime/**',
+            '**/grails/util/**',
+            '**/org/codehaus/**',
+            '**/org/grails/**',
+            '**GrailsPlugin**',
+            '**TagLib**'
+    ]
+
 }
