@@ -37,6 +37,9 @@ grails.project.dependency.resolution = {
         compile group: 'canoo', name: 'ulc-jnlp-client', version: ulcVersion
         compile group: 'canoo', name: 'ulc-servlet-client', version: ulcVersion
         compile group: 'canoo', name: 'ulc-standalone-client', version: ulcVersion
+
+        runtime group: 'jfree', name: 'jfreechart', version: '1.0.12'
+        runtime group: 'jfree', name: 'jcommon', version: '1.0.15'
     }
 }
 
