@@ -20,7 +20,7 @@ grails.project.dependency.resolution = {
 
     mavenRepo "https://build.intuitive-collaboration.com/maven/plugins/"
 
-    String ulcVersion = "ria-suite-u2"
+    String ulcVersion = "ria-suite-u5"
 
     plugins {
         runtime ":maven-publisher:0.7.5"
