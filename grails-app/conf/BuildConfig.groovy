@@ -7,24 +7,26 @@ grails.project.dependency.resolution = {
     repositories {
         grailsHome()
         grailsCentral()
+
+        mavenCentral()
+        def ulcClientJarResolver = new FileSystemResolver()
+        String absolutePluginDir = grailsSettings.projectPluginsDir.absolutePath
+
+        ulcClientJarResolver.addArtifactPattern "${absolutePluginDir}/ulc-[revision]/web-app/lib/[artifact].[ext]"
+        ulcClientJarResolver.name = "ulc"
+
+        resolver ulcClientJarResolver
+
+
+        mavenRepo "https://build.intuitive-collaboration.com/maven/plugins/"
     }
-
-    def ulcClientJarResolver = new FileSystemResolver()
-    String absolutePluginDir = grailsSettings.projectPluginsDir.absolutePath
-
-    ulcClientJarResolver.addArtifactPattern "${absolutePluginDir}/ulc-[revision]/web-app/lib/[artifact].[ext]"
-    ulcClientJarResolver.name = "ulc"
-
-    resolver ulcClientJarResolver
-
-
-    mavenRepo "https://build.intuitive-collaboration.com/maven/plugins/"
 
     String ulcVersion = "ria-suite-u5"
 
     plugins {
-        runtime ":maven-publisher:0.7.5"
-        runtime ":jetty:1.2-SNAPSHOT"
+        runtime ":maven-publisher:0.7.5", {
+            excludes "groovy"
+        }
         compile "com.canoo:ulc:${ulcVersion}"
 
         test ":code-coverage:1.2.4"
@@ -40,6 +42,14 @@ grails.project.dependency.resolution = {
 
         runtime group: 'jfree', name: 'jfreechart', version: '1.0.12'
         runtime group: 'jfree', name: 'jcommon', version: '1.0.15'
+
+        //required for ulc tests
+        test 'org.mortbay.jetty:jetty:6.1.21', 'org.mortbay.jetty:jetty-plus:6.1.21'
+        test 'org.mortbay.jetty:jetty-util:6.1.21', 'org.mortbay.jetty:jetty-naming:6.1.21'
+        test('org.mortbay.jetty:jsp-2.0:6.1.21') {
+            excludes 'commons-el', 'ant', 'slf4j-api', 'slf4j-simple', 'jcl104-over-slf4j', 'xercesImpl', 'xmlParserAPIs'
+        }
+        test 'hsqldb:hsqldb:1.8.0.10'
     }
 }
 
