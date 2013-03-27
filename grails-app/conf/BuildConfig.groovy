@@ -18,7 +18,7 @@ grails.project.dependency.resolution = {
         resolver ulcClientJarResolver
 
 
-        mavenRepo "https://build.intuitive-collaboration.com/maven/plugins/"
+        mavenRepo "https://repository.intuitive-collaboration.com/nexus/content/repositories/pillarone-public/"
     }
 
     String ulcVersion = "ria-suite-2012-u1"
