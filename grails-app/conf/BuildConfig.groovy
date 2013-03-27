@@ -21,7 +21,7 @@ grails.project.dependency.resolution = {
         mavenRepo "https://build.intuitive-collaboration.com/maven/plugins/"
     }
 
-    String ulcVersion = "ria-suite-u5"
+    String ulcVersion = "ria-suite-2012-u1"
 
     plugins {
         runtime ":maven-publisher:0.7.5", {
@@ -33,15 +33,7 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        compile group: 'canoo', name: 'ulc-applet-client', version: ulcVersion
-        compile group: 'canoo', name: 'ulc-base-client', version: ulcVersion
-        compile group: 'canoo', name: 'ulc-base-trusted', version: ulcVersion
-        compile group: 'canoo', name: 'ulc-jnlp-client', version: ulcVersion
-        compile group: 'canoo', name: 'ulc-servlet-client', version: ulcVersion
-        compile group: 'canoo', name: 'ulc-standalone-client', version: ulcVersion
-
-        runtime group: 'jfree', name: 'jfreechart', version: '1.0.12'
-        runtime group: 'jfree', name: 'jcommon', version: '1.0.15'
+        compile('jfree:jfreechart:1.0.12')
 
         //required for ulc tests
         test 'org.mortbay.jetty:jetty:6.1.21', 'org.mortbay.jetty:jetty-plus:6.1.21'

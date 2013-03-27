@@ -34,11 +34,11 @@ public class UIErrorFeedbackLabel extends UILabel {
                 if (value instanceof Double || value instanceof Integer) {
                     NumberFormat numberFormat = NumberFormat.getInstance();
                     numberFormat.setGroupingUsed(false);
-                    fDataType.convertToObject(numberFormat.format(value), fValue);
+                    fDataType.convertToObject(getBasicLabel(), numberFormat.format(value), fValue);
                 } else if (value instanceof Date) {
-                    fDataType.convertToObject(fDataType.convertToString(value, false), fValue);
+                    fDataType.convertToObject(getBasicLabel(), fDataType.convertToString(value, false), fValue);
                 } else {
-                    fDataType.convertToObject(String.valueOf(value), fValue);
+                    fDataType.convertToObject(getBasicLabel(), String.valueOf(value), fValue);
                 }
                 getBasicLabel().setBorder(null);
                 getBasicLabel().setOpaque(true);
@@ -59,7 +59,7 @@ public class UIErrorFeedbackLabel extends UILabel {
         }
     }
 
-     private boolean isNotEmpty(Object obj){
+    private boolean isNotEmpty(Object obj){
         return (obj != null && !"".equals(obj)) ;
     }
 }
