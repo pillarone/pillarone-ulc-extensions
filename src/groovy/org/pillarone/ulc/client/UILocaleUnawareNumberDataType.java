@@ -3,7 +3,7 @@ package org.pillarone.ulc.client;
 import com.ulcjava.base.client.datatype.DataTypeConversionException;
 import com.ulcjava.base.client.datatype.UINumberDataType;
 
-public class UILocaleUnawareNumberDataType extends UINumberDataType {
+public class UILocaleUnawareNumberDataType extends UINonEmptyNumberDataType {
 
     @Override
     protected Object doStringToObjectConversion(String newString, Object previousValue) throws DataTypeConversionException {
