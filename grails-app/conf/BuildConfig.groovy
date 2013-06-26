@@ -21,7 +21,7 @@ grails.project.dependency.resolution = {
         mavenRepo "https://repository.intuitive-collaboration.com/nexus/content/repositories/pillarone-public/"
     }
 
-    String ulcVersion = "ria-suite-2012-u1"
+    String ulcVersion = "ria-suite-2012-u1-2"
 
     plugins {
         runtime ":maven-publisher:0.7.5", {
