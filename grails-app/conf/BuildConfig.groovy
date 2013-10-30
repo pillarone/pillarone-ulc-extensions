@@ -1,5 +1,7 @@
 import org.apache.ivy.plugins.resolver.FileSystemResolver
 
+grails.project.dependency.resolver = "maven"
+
 grails.project.dependency.resolution = {
     inherits "global" // inherit Grails' default dependencies
     log "warn"
@@ -9,14 +11,6 @@ grails.project.dependency.resolution = {
         grailsCentral()
 
         mavenCentral()
-        def ulcClientJarResolver = new FileSystemResolver()
-        String absolutePluginDir = grailsSettings.projectPluginsDir.absolutePath
-
-        ulcClientJarResolver.addArtifactPattern "${absolutePluginDir}/ulc-[revision]/web-app/lib/[artifact].[ext]"
-        ulcClientJarResolver.name = "ulc"
-
-        resolver ulcClientJarResolver
-
 
         mavenRepo "https://repository.intuitive-collaboration.com/nexus/content/repositories/pillarone-public/"
     }
@@ -24,12 +18,12 @@ grails.project.dependency.resolution = {
     String ulcVersion = "ria-suite-2013"
 
     plugins {
-        runtime ":maven-publisher:0.7.5", {
+        runtime ":release:3.0.1", {
             excludes "groovy"
         }
         compile "com.canoo:ulc:${ulcVersion}"
 
-        test ":code-coverage:1.2.4"
+        test ":code-coverage:1.2.6"
     }
 
     dependencies {
@@ -38,9 +32,6 @@ grails.project.dependency.resolution = {
         //required for ulc tests
         test 'org.mortbay.jetty:jetty:6.1.21', 'org.mortbay.jetty:jetty-plus:6.1.21'
         test 'org.mortbay.jetty:jetty-util:6.1.21', 'org.mortbay.jetty:jetty-naming:6.1.21'
-        test('org.mortbay.jetty:jsp-2.0:6.1.21') {
-            excludes 'commons-el', 'ant', 'slf4j-api', 'slf4j-simple', 'jcl104-over-slf4j', 'xercesImpl', 'xmlParserAPIs'
-        }
         test 'hsqldb:hsqldb:1.8.0.10'
     }
 }

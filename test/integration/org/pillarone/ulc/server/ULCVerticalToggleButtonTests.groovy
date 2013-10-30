@@ -30,22 +30,19 @@ class ULCVerticalToggleButtonTests extends AbstractSimpleStandaloneTestCase {
         button.clickMouse()
     }
 
-    private static class DoNothing extends AbstractAction {
-
-        DoNothing() {
-        }
-
-        DoNothing(String s) {
-            super(s)
-        }
-
-        void actionPerformed(ActionEvent actionEvent) {
-
-        }
-
-    }
-
 }
 
+class DoNothing extends AbstractAction {
 
+    DoNothing() {
+    }
+
+    DoNothing(String s) {
+        super(s)
+    }
+
+    void actionPerformed(ActionEvent actionEvent) {
+
+    }
+}
 
