@@ -15,7 +15,7 @@ grails.project.dependency.resolution = {
         mavenRepo "https://repository.intuitive-collaboration.com/nexus/content/repositories/pillarone-public/"
     }
 
-    String ulcVersion = "ria-suite-2013"
+    String ulcVersion = "ria-suite-2013-2"
 
     plugins {
         runtime ":release:3.0.1", {
@@ -56,7 +56,6 @@ grails.project.dependency.distribution = {
 
 coverage {
     enabledByDefault = true
-    xml = true
     exclusions = [
             'models/**',
             '**/*Test*',
