@@ -1,6 +1,6 @@
-import org.apache.ivy.plugins.resolver.FileSystemResolver
-
 grails.project.dependency.resolver = "maven"
+
+grails.project.target.level = 1.6
 
 grails.project.dependency.resolution = {
     inherits "global" // inherit Grails' default dependencies
@@ -22,7 +22,6 @@ grails.project.dependency.resolution = {
             excludes "groovy"
         }
         compile "com.canoo:ulc:${ulcVersion}"
-
         test ":code-coverage:1.2.6"
     }
 
@@ -55,7 +54,6 @@ grails.project.dependency.distribution = {
 }
 
 coverage {
-    enabledByDefault = true
     exclusions = [
             'models/**',
             '**/*Test*',
