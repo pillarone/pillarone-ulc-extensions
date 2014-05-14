@@ -17,6 +17,7 @@ import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeExpansionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -136,19 +137,23 @@ public class UIFixedColumnTableTree extends UIScrollPane {
         }
 
         public void valueChanged(TreeSelectionEvent event) {
-            if (event.isAddedPath()) { //not called during clearing
-                if (fSource.getCellSelectionEnabled() || fSource.getColumnSelectionAllowed()) {
-                    fTarget.clearSelection();
-                    if (fTarget.getColumnCount() > 0) {
-                        fTarget.removeColumnSelectionInterval(0, fTarget.getColumnCount() - 1);
-                        fTarget.scrollCellToVisible(event.getPath(), 0);
+            if (fSource.getRowSelectionAllowed()) {
+                fSource.getSelectionModel().removeTreeSelectionListener(this);
+                for (TreePath path : event.getPaths()) {
+                    if (event.isAddedPath(path)) {
+                        fTarget.addPathSelection(path);
+                    } else {
+                        fTarget.removePathSelection(path);
                     }
-                } else if (fSource.getRowSelectionAllowed()) {
-                    int[] selectedRows = fSource.getSelectedRows();
-                    for (int selectedRow : selectedRows) {
-                        fTarget.setRowSelectionInterval(selectedRow, selectedRow);
-                        fTarget.scrollCellToVisible(event.getPath(), 0);
-                    }
+                }
+                fSource.getSelectionModel().addTreeSelectionListener(this);
+                return;
+            }
+            if (event.isAddedPath() && fSource.getCellSelectionEnabled() || fSource.getColumnSelectionAllowed()) {
+                fTarget.clearSelection();
+                if (fTarget.getColumnCount() > 0) {
+                    fTarget.removeColumnSelectionInterval(0, fTarget.getColumnCount() - 1);
+                    fTarget.scrollCellToVisible(event.getPath(), 0);
                 }
             }
         }
