@@ -137,7 +137,14 @@ public class UIFixedColumnTableTree extends UIScrollPane {
         }
 
         public void valueChanged(TreeSelectionEvent event) {
-            if (fSource.getRowSelectionAllowed()) {
+
+            if (event.isAddedPath() && fSource.getCellSelectionEnabled() || fSource.getColumnSelectionAllowed()) {
+                fTarget.clearSelection();
+                if (fTarget.getColumnCount() > 0) {
+                    fTarget.removeColumnSelectionInterval(0, fTarget.getColumnCount() - 1);
+                    fTarget.scrollCellToVisible(event.getPath(), 0);
+                }
+            } else if (fSource.getRowSelectionAllowed()) {
                 fSource.getSelectionModel().removeTreeSelectionListener(this);
                 for (TreePath path : event.getPaths()) {
                     if (event.isAddedPath(path)) {
@@ -147,14 +154,6 @@ public class UIFixedColumnTableTree extends UIScrollPane {
                     }
                 }
                 fSource.getSelectionModel().addTreeSelectionListener(this);
-                return;
-            }
-            if (event.isAddedPath() && fSource.getCellSelectionEnabled() || fSource.getColumnSelectionAllowed()) {
-                fTarget.clearSelection();
-                if (fTarget.getColumnCount() > 0) {
-                    fTarget.removeColumnSelectionInterval(0, fTarget.getColumnCount() - 1);
-                    fTarget.scrollCellToVisible(event.getPath(), 0);
-                }
             }
         }
     }
