@@ -137,12 +137,13 @@ public class UIFixedColumnTableTree extends UIScrollPane {
         }
 
         public void valueChanged(TreeSelectionEvent event) {
-
-            if (event.isAddedPath() && fSource.getCellSelectionEnabled() || fSource.getColumnSelectionAllowed()) {
-                fTarget.clearSelection();
-                if (fTarget.getColumnCount() > 0) {
-                    fTarget.removeColumnSelectionInterval(0, fTarget.getColumnCount() - 1);
-                    fTarget.scrollCellToVisible(event.getPath(), 0);
+            if (fSource.getCellSelectionEnabled() || fSource.getColumnSelectionAllowed()) {
+                if (event.isAddedPath()) {
+                    fTarget.clearSelection();
+                    if (fTarget.getColumnCount() > 0) {
+                        fTarget.removeColumnSelectionInterval(0, fTarget.getColumnCount() - 1);
+                        fTarget.scrollCellToVisible(event.getPath(), 0);
+                    }
                 }
             } else if (fSource.getRowSelectionAllowed()) {
                 fSource.getSelectionModel().removeTreeSelectionListener(this);

@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
 grails.project.dependency.distribution = {
     String password = ""
     String user = ""
-    String scpUrl = ""
+    String scpUrl = "dummy"
     try {
         Properties properties = new Properties()
         properties.load(new File("${userHome}/deployInfo.properties").newInputStream())
