@@ -50,8 +50,12 @@ public class UIFixedColumnTableTree extends UIScrollPane {
                 KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_DOWN_MASK)
         });
         rowHeader.addTreeExpansionListener(new MyExpansionListener(viewPort));
-        rowHeader.addTreeSelectionListener(new MySelectionListener(viewPort, rowHeader));
-        viewPort.addTreeSelectionListener(new MySelectionListener(rowHeader, viewPort));
+        MySelectionListener rowHeaderListener = new MySelectionListener(viewPort, rowHeader);
+        MySelectionListener viewPortListener = new MySelectionListener(rowHeader, viewPort);
+        viewPortListener.setTargetListener(rowHeaderListener);
+        rowHeaderListener.setTargetListener(viewPortListener);
+        rowHeader.addTreeSelectionListener(rowHeaderListener);
+        viewPort.addTreeSelectionListener(viewPortListener);
 
         Dimension preferredSize = getRowHeaderDimension(rowHeader);
         getBasicScrollPane().getRowHeader().setPreferredSize(preferredSize);
@@ -130,13 +134,19 @@ public class UIFixedColumnTableTree extends UIScrollPane {
     private class MySelectionListener implements TreeSelectionListener {
         private JTableTree fTarget;
         private JTableTree fSource;
+        private MySelectionListener fTargetListener;
 
         public MySelectionListener(JTableTree target, JTableTree source) {
             fTarget = target;
             fSource = source;
         }
 
+        public void setTargetListener(MySelectionListener fTargetListener) {
+            this.fTargetListener = fTargetListener;
+        }
+
         public void valueChanged(TreeSelectionEvent event) {
+
             if (fSource.getCellSelectionEnabled() || fSource.getColumnSelectionAllowed()) {
                 if (event.isAddedPath()) {
                     fTarget.clearSelection();
@@ -146,7 +156,7 @@ public class UIFixedColumnTableTree extends UIScrollPane {
                     }
                 }
             } else if (fSource.getRowSelectionAllowed()) {
-                fSource.getSelectionModel().removeTreeSelectionListener(this);
+                fTarget.getSelectionModel().removeTreeSelectionListener(fTargetListener);
                 for (TreePath path : event.getPaths()) {
                     if (event.isAddedPath(path)) {
                         fTarget.addPathSelection(path);
@@ -154,7 +164,7 @@ public class UIFixedColumnTableTree extends UIScrollPane {
                         fTarget.removePathSelection(path);
                     }
                 }
-                fSource.getSelectionModel().addTreeSelectionListener(this);
+                fTarget.getSelectionModel().addTreeSelectionListener(fTargetListener);
             }
         }
     }
