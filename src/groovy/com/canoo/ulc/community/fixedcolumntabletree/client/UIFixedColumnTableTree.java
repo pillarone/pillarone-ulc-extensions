@@ -164,7 +164,9 @@ public class UIFixedColumnTableTree extends UIScrollPane {
                         fTarget.removePathSelection(path);
                     }
                 }
-                fTarget.scrollCellToVisible(event.getPath(), 0);
+                if (event.getNewLeadSelectionPath() != null) {
+                    fTarget.scrollCellToVisible(event.getNewLeadSelectionPath(), 0);
+                }
                 fTarget.getSelectionModel().addTreeSelectionListener(fTargetListener);
             }
         }
