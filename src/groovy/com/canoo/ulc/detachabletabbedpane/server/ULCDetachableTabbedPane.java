@@ -174,8 +174,9 @@ public class ULCDetachableTabbedPane extends ULCCloseableTabbedPane {
      */
     public void undock(int tabIndex) {
 
-        if (tabIndex < 0 && tabIndex >= getTabCount())
+        if (tabIndex < 0 || tabIndex >= getTabCount()) {
             return;
+        }
 
         // create a new frame with a tabbed pane
         ULCWindow window = UlcUtilities.getWindowAncestor(this);
